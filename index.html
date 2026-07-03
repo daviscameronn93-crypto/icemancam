@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>icemancam | Developer & Creative Technologist</title>
+    <meta name="description" content="Portfolio of Cameron (icemancam) — Full-stack developer, software engineer, and creative technologist specializing in premium, highly interactive digital experiences.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://icemancam.com/">
+    <meta property="og:title" content="icemancam | Developer & Creative Technologist">
+    <meta property="og:description" content="Portfolio of Cameron (icemancam) — Full-stack developer, software engineer, and creative technologist.">
+    <meta property="og:image" content="assets/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://icemancam.com/">
+    <meta property="twitter:title" content="icemancam | Developer & Creative Technologist">
+    <meta property="twitter:description" content="Portfolio of Cameron (icemancam) — Full-stack developer, software engineer, and creative technologist.">
+    <meta property="twitter:image" content="assets/og-image.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="dark-theme">
+    <!-- Background Glow Elements -->
+    <div class="glow-bg" aria-hidden="true">
+        <div class="glow-sphere glow-sphere-1"></div>
+        <div class="glow-sphere glow-sphere-2"></div>
+    </div>
+
+    <!-- Header / Navigation -->
+    <header class="site-header" id="site-header">
+        <div class="header-container">
+            <a href="#home" class="logo" id="header-logo">
+                <span class="logo-accent">ice</span>mancam<span class="logo-dot">.</span>
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="#home" class="nav-link active" id="nav-link-home">Home</a></li>
+                    <li><a href="#about" class="nav-link" id="nav-link-about">About</a></li>
+                    <li><a href="#projects" class="nav-link" id="nav-link-projects">Projects</a></li>
+                    <li><a href="#contact" class="nav-link" id="nav-link-contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="#contact" class="btn btn-primary btn-sm" id="cta-header-connect">Let's Connect</a>
+                <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="badge" id="hero-badge">
+                        <span class="badge-dot"></span> Available for new opportunities
+                    </div>
+                    <h1 class="hero-title" id="hero-main-title">
+                        Building Digital <br>
+                        <span class="text-gradient">Masterpieces</span> With Code
+                    </h1>
+                    <p class="hero-subtitle" id="hero-sub">
+                        Hi, I'm Cameron. A full-stack developer and UI/UX enthusiast dedicated to crafting performant, visually spectacular, and highly accessible web experiences.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary" id="btn-hero-projects">
+                            View Work <i data-lucide="arrow-right"></i>
+                        </a>
+                        <a href="#contact" class="btn btn-secondary" id="btn-hero-contact">
+                            Get In Touch
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="hero-visual">
+                    <div class="interactive-card" id="hero-interactive-card">
+                        <div class="card-header">
+                            <div class="window-dot red"></div>
+                            <div class="window-dot yellow"></div>
+                            <div class="window-dot green"></div>
+                            <span class="window-title">cameron.config.js</span>
+                        </div>
+                        <div class="card-body">
+                            <pre><code><span class="code-keyword">const</span> <span class="code-variable">developer</span> = {
+  name: <span class="code-string">'Cameron'</span>,
+  role: <span class="code-string">'Creative Engineer'</span>,
+  skills: [
+    <span class="code-string">'TypeScript'</span>, <span class="code-string">'React'</span>,
+    <span class="code-string">'Node.js'</span>, <span class="code-string">'CSS/WebGL'</span>,
+    <span class="code-string">'Cloud Architecture'</span>
+  ],
+  passion: <span class="code-string">'Stunning UI & Clean Code'</span>,
+  coffeeConsumption: <span class="code-number">100</span>
+};</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tagline">My Journey</span>
+                    <h2 class="section-title">About Me</h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-text">
+                        <p>
+                            I'm a designer-minded developer with a passion for bridging the gap between elegant interface design and clean engineering practices. I believe software should not only function flawlessly but also feel delightful to use.
+                        </p>
+                        <p>
+                            With years of experience building modern web architectures, I focus on performance, robust architecture, and polished micro-animations that breathe life into static web pages.
+                        </p>
+                        <div class="stats-row">
+                            <div class="stat-card">
+                                <span class="stat-num" id="stat-years">5+</span>
+                                <span class="stat-label">Years Exp</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-num" id="stat-projects">40+</span>
+                                <span class="stat-label">Projects</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-num" id="stat-clients">100%</span>
+                                <span class="stat-label">Commitment</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-skills">
+                        <h3 class="skills-title">Core Toolkit</h3>
+                        <div class="skills-grid" id="skills-grid">
+                            <div class="skill-pill"><i data-lucide="code-2"></i> JavaScript (ES6+)</div>
+                            <div class="skill-pill"><i data-lucide="layers"></i> React / Next.js</div>
+                            <div class="skill-pill"><i data-lucide="palette"></i> CSS Grid & Flexbox</div>
+                            <div class="skill-pill"><i data-lucide="server"></i> Node.js & Express</div>
+                            <div class="skill-pill"><i data-lucide="database"></i> PostgreSQL & Mongo</div>
+                            <div class="skill-pill"><i data-lucide="git-branch"></i> Git & GitHub Pages</div>
+                            <div class="skill-pill"><i data-lucide="terminal"></i> Shell Scripting</div>
+                            <div class="skill-pill"><i data-lucide="cpu"></i> RESTful APIs</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects-section">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tagline">Recent Work</span>
+                    <h2 class="section-title">Selected Projects</h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <article class="project-card" id="project-card-1">
+                        <div class="project-img-wrapper">
+                            <div class="project-gradient-placeholder p-gradient-1"></div>
+                            <div class="project-overlay">
+                                <a href="#" class="project-link" aria-label="View Project Source" id="p1-source"><i data-lucide="github"></i></a>
+                                <a href="#" class="project-link" aria-label="View Live Project" id="p1-live"><i data-lucide="external-link"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <span class="project-tag">Web Application</span>
+                            <h3 class="project-name">Nebula Analytics</h3>
+                            <p class="project-description">
+                                A high-performance dashboard application visualizing server logs and user patterns in real-time. Built with interactive canvas charts.
+                            </p>
+                            <div class="project-tech">
+                                <span>React</span>
+                                <span>D3.js</span>
+                                <span>Node.js</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 2 -->
+                    <article class="project-card" id="project-card-2">
+                        <div class="project-img-wrapper">
+                            <div class="project-gradient-placeholder p-gradient-2"></div>
+                            <div class="project-overlay">
+                                <a href="#" class="project-link" aria-label="View Project Source" id="p2-source"><i data-lucide="github"></i></a>
+                                <a href="#" class="project-link" aria-label="View Live Project" id="p2-live"><i data-lucide="external-link"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <span class="project-tag">Design System</span>
+                            <h3 class="project-name">Aether UI</h3>
+                            <p class="project-description">
+                                An accessible, headless component library optimized for rapid UI prototyping and strict brand alignment.
+                            </p>
+                            <div class="project-tech">
+                                <span>Web Components</span>
+                                <span>CSS Variables</span>
+                                <span>Rollup</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3 -->
+                    <article class="project-card" id="project-card-3">
+                        <div class="project-img-wrapper">
+                            <div class="project-gradient-placeholder p-gradient-3"></div>
+                            <div class="project-overlay">
+                                <a href="#" class="project-link" aria-label="View Project Source" id="p3-source"><i data-lucide="github"></i></a>
+                                <a href="#" class="project-link" aria-label="View Live Project" id="p3-live"><i data-lucide="external-link"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <span class="project-tag">Creative Web</span>
+                            <h3 class="project-name">Chronos Engine</h3>
+                            <p class="project-description">
+                                An interactive storytelling site featuring immersive scrolling animations, dynamic soundscapes, and full WebGL shader backdrops.
+                            </p>
+                            <div class="project-tech">
+                                <span>HTML5 Canvas</span>
+                                <span>Three.js</span>
+                                <span>GSAP</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tagline">Get In Touch</span>
+                    <h2 class="section-title">Let's Create Something Great</h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="contact-layout">
+                    <div class="contact-info">
+                        <h3>Interested in collaborating?</h3>
+                        <p>
+                            Whether you have an upcoming project, want to discuss software development, or just want to say hi, feel free to drop a message or connect through social channels.
+                        </p>
+                        
+                        <ul class="contact-list">
+                            <li>
+                                <div class="contact-icon"><i data-lucide="mail"></i></div>
+                                <div class="contact-details">
+                                    <span class="contact-label">Email</span>
+                                    <a href="mailto:hello@icemancam.com" class="contact-value">hello@icemancam.com</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="contact-icon"><i data-lucide="map-pin"></i></div>
+                                <div class="contact-details">
+                                    <span class="contact-label">Location</span>
+                                    <span class="contact-value">Austin, Texas (Open to remote)</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="contact-form-container">
+                        <form id="contact-form" class="contact-form" action="https://formspree.io/f/placeholder" method="POST">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="form-name">Name</label>
+                                    <input type="text" id="form-name" name="name" required placeholder="John Doe">
+                                </div>
+                                <div class="form-group">
+                                    <label for="form-email">Email</label>
+                                    <input type="email" id="form-email" name="email" required placeholder="john@example.com">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="form-subject">Subject</label>
+                                <input type="text" id="form-subject" name="subject" required placeholder="Project Proposal">
+                            </div>
+                            <div class="form-group">
+                                <label for="form-message">Message</label>
+                                <textarea id="form-message" name="message" rows="5" required placeholder="Tell me about your project..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block" id="form-submit-btn">
+                                Send Message <i data-lucide="send"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="#home" class="logo">
+                    <span class="logo-accent">ice</span>mancam<span class="logo-dot">.</span>
+                </a>
+                <p>Crafting high-end, responsive digital interfaces.</p>
+            </div>
+            
+            <div class="footer-links">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub" id="social-git"><i data-lucide="github"></i></a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn" id="social-linkedin"><i data-lucide="linkedin"></i></a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Twitter" id="social-twitter"><i data-lucide="twitter"></i></a>
+            </div>
+            
+            <div class="footer-copyright">
+                <p>&copy; 2026 icemancam.com. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
