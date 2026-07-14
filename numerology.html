@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numerology | icemancam</title>
+    <meta name="description" content="Free Pythagorean numerology birth chart generator and daily numberscope by icemancam.">
+    <meta property="og:title" content="Numerology | icemancam">
+    <meta property="og:description" content="Generate your numerology birth chart and get your daily numberscope.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://icemancam.com/numerology.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ===== Numerology page-specific styles (uses site design tokens) ===== */
+        .numerology-hero {
+            padding: 160px 24px 40px 24px;
+            text-align: center;
+        }
+        .numerology-hero .hero-title { animation: fadeInUp 0.8s cubic-bezier(0.16,1,0.3,1) forwards; }
+        .numerology-hero .hero-subtitle {
+            margin: 0 auto 0 auto;
+            max-width: 620px;
+            animation: fadeInUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.15s forwards;
+        }
+
+        .num-panel {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 32px;
+            backdrop-filter: blur(8px);
+        }
+
+        .num-form-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr auto;
+            gap: 20px;
+            align-items: end;
+        }
+        @media (max-width: 768px) {
+            .num-form-grid { grid-template-columns: 1fr; }
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .num-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 28px;
+            transition: var(--transition-smooth);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .num-card.revealed {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1), border-color var(--transition-fast);
+        }
+        .num-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+        }
+
+        .num-card-top {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 16px;
+        }
+
+        .num-circle {
+            flex-shrink: 0;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-purple) 100%);
+            color: hsl(222, 47%, 7%);
+            box-shadow: 0 0 24px var(--color-accent-glow);
+        }
+        .num-circle.master {
+            background: linear-gradient(135deg, hsl(45, 90%, 60%) 0%, var(--color-accent-purple) 100%);
+        }
+
+        .num-card-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .num-card-name {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+        .num-card-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        .master-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: hsl(45, 90%, 60%);
+            border: 1px solid hsla(45, 90%, 60%, 0.35);
+            border-radius: 4px;
+            padding: 2px 8px;
+            margin-top: 6px;
+        }
+
+        /* Daily numberscope */
+        .scope-panel {
+            position: relative;
+            overflow: hidden;
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 40px;
+            backdrop-filter: blur(8px);
+        }
+        .scope-panel::before {
+            content: '';
+            position: absolute;
+            top: -60%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--color-accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .scope-date {
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+        .scope-numbers {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+        .scope-num-block { text-align: center; }
+        .scope-num-value {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+        .scope-num-label {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .scope-headline {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .scope-text {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 720px;
+        }
+        .scope-lucky {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+        .scope-lucky span {
+            font-size: 0.8rem;
+            font-weight: 500;
+            background-color: hsla(217, 32%, 18%, 0.4);
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 9999px;
+            color: var(--text-secondary);
+        }
+        .num-hidden { display: none; }
+        .num-error {
+            color: hsl(0, 80%, 68%);
+            font-size: 0.85rem;
+            margin-top: 12px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background glow decorations -->
+    <div class="glow-bg" aria-hidden="true">
+        <div class="glow-sphere glow-sphere-1"></div>
+        <div class="glow-sphere glow-sphere-2"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="site-header" id="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">icemancam<span class="logo-dot">.</span></a>
+            <nav class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li><a href="index.html#home" class="nav-link">Home</a></li>
+                    <li><a href="index.html#about" class="nav-link">About</a></li>
+                    <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+                    <li><a href="numerology.html" class="nav-link active">Numerology</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="index.html#contact" class="btn btn-primary btn-sm">Let's Connect</a>
+                <button class="mobile-nav-toggle" id="navToggle" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="numerology-hero" id="top">
+            <div class="section-container">
+                <div class="badge"><span class="badge-dot"></span> Free Interactive Tool</div>
+                <h1 class="hero-title">Decode Your Numbers.<br><span class="text-gradient">Numerology, Engineered.</span></h1>
+                <p class="hero-subtitle">Enter your name and birth date to generate a full Pythagorean birth chart — plus a daily numberscope calculated just for you. Everything runs in your browser; nothing is stored or sent anywhere.</p>
+            </div>
+        </section>
+
+        <!-- Input panel -->
+        <section style="padding-top: 20px;" id="generator">
+            <div class="section-container" style="max-width: 900px;">
+                <div class="num-panel">
+                    <form id="numForm" novalidate>
+                        <div class="num-form-grid">
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label for="fullName">Full Birth Name</label>
+                                <input type="text" id="fullName" placeholder="e.g. Cameron James Davis" autocomplete="name">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label for="birthDate">Date of Birth</label>
+                                <input type="date" id="birthDate">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Generate Chart</button>
+                        </div>
+                        <p class="num-error" id="formError">Please enter your name and a valid birth date.</p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Daily Numberscope -->
+        <section class="num-hidden" style="padding-top: 20px; padding-bottom: 20px;" id="numberscope">
+            <div class="section-container">
+                <div class="section-header" style="margin-bottom: 40px;">
+                    <span class="section-tagline">Today's Energy</span>
+                    <h2 class="section-title">Daily Numberscope</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="scope-panel">
+                    <p class="scope-date" id="scopeDate"></p>
+                    <div class="scope-numbers">
+                        <div class="scope-num-block">
+                            <div class="scope-num-value text-gradient" id="personalDayNum"></div>
+                            <div class="scope-num-label">Personal Day</div>
+                        </div>
+                        <div class="scope-num-block">
+                            <div class="scope-num-value" id="personalMonthNum" style="color: var(--text-secondary);"></div>
+                            <div class="scope-num-label">Personal Month</div>
+                        </div>
+                        <div class="scope-num-block">
+                            <div class="scope-num-value" id="personalYearNum" style="color: var(--text-secondary);"></div>
+                            <div class="scope-num-label">Personal Year</div>
+                        </div>
+                        <div class="scope-num-block">
+                            <div class="scope-num-value" id="universalDayNum" style="color: var(--text-muted);"></div>
+                            <div class="scope-num-label">Universal Day</div>
+                        </div>
+                    </div>
+                    <h3 class="scope-headline" id="scopeHeadline"></h3>
+                    <p class="scope-text" id="scopeText"></p>
+                    <div class="scope-lucky" id="scopeLucky"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Birth Chart Results -->
+        <section class="num-hidden" style="padding-top: 40px;" id="chart">
+            <div class="section-container">
+                <div class="section-header" style="margin-bottom: 20px;">
+                    <span class="section-tagline">Pythagorean System</span>
+                    <h2 class="section-title">Your Birth Chart</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="chart-grid" id="chartGrid"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">icemancam<span class="logo-dot">.</span></a>
+                <p>Crafting high-end, responsive digital interfaces.</p>
+            </div>
+            <p class="footer-copyright">&copy; 2026 icemancam.com. All rights reserved. Numerology content is for entertainment purposes.</p>
+        </div>
+    </footer>
+
+    <script>
+    /* =====================================================================
+       NUMEROLOGY ENGINE — Pythagorean system, fully client-side
+       ===================================================================== */
+    'use strict';
+
+    // Pythagorean letter values: A=1 ... I=9, J=1 ... R=9, S=1 ... Z=8
+    const LETTER_VALUES = {};
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach((ch, i) => {
+        LETTER_VALUES[ch] = (i % 9) + 1;
+    });
+    const VOWELS = new Set(['A', 'E', 'I', 'O', 'U']);
+    const MASTERS = new Set([11, 22, 33]);
+
+    // Sum digits of a number
+    function digitSum(n) {
+        return String(n).split('').reduce((a, d) => a + Number(d), 0);
+    }
+
+    // Reduce to a single digit, preserving master numbers 11/22/33
+    function reduce(n, keepMasters = true) {
+        while (n > 9 && !(keepMasters && MASTERS.has(n))) n = digitSum(n);
+        return n;
+    }
+
+    function lettersOf(name) {
+        return name.toUpperCase().replace(/[^A-Z]/g, '').split('');
+    }
+
+    // Y counts as a vowel when it's not adjacent to another vowel (common convention)
+    function isVowelAt(word, i) {
+        const ch = word[i];
+        if (VOWELS.has(ch)) return true;
+        if (ch !== 'Y') return false;
+        const prev = word[i - 1], next = word[i + 1];
+        return !(VOWELS.has(prev) || VOWELS.has(next));
+    }
+
+    // --- Core numbers ---
+    function lifePath(y, m, d) {
+        // Reduce month, day, year separately, then sum (standard method)
+        return reduce(reduce(m) + reduce(d) + reduce(y));
+    }
+    function expression(name) {
+        // Reduce each word, then sum the reduced word values
+        const words = name.toUpperCase().split(/[^A-Z]+/).filter(Boolean);
+        return reduce(words.reduce((a, w) => a + reduce(lettersOf(w).reduce((s, ch) => s + LETTER_VALUES[ch], 0)), 0));
+    }
+    function nameNumber(name, wantVowels) {
+        const words = name.toUpperCase().split(/[^A-Z]+/).filter(Boolean);
+        let total = 0;
+        for (const w of words) {
+            let wsum = 0;
+            for (let i = 0; i < w.length; i++) {
+                if (isVowelAt(w, i) === wantVowels) wsum += LETTER_VALUES[w[i]] || 0;
+            }
+            total += reduce(wsum);
+        }
+        return reduce(total);
+    }
+    const soulUrge = (name) => nameNumber(name, true);
+    const personality = (name) => nameNumber(name, false);
+    const birthdayNumber = (d) => reduce(d);
+
+    // --- Cycle numbers (personal year / month / day) ---
+    function personalYear(bMonth, bDay, calYear) {
+        return reduce(reduce(bMonth) + reduce(bDay) + reduce(calYear), false);
+    }
+    function personalMonth(pYear, calMonth) {
+        return reduce(pYear + reduce(calMonth), false);
+    }
+    function personalDay(pMonth, calDay) {
+        return reduce(pMonth + reduce(calDay), false);
+    }
+    function universalDay(y, m, d) {
+        return reduce(reduce(y) + reduce(m) + reduce(d), false);
+    }
+
+    /* =====================================================================
+       READING LIBRARY
+       ===================================================================== */
+    const CORE_MEANINGS = {
+        1:  { name: 'The Pioneer',    text: 'Independent, ambitious, and original. You lead by instinct, carve your own path, and thrive when initiating rather than following. Watch for stubbornness and impatience.' },
+        2:  { name: 'The Diplomat',   text: 'Intuitive, cooperative, and sensitive to others. You excel at partnership, mediation, and reading the room. Guard against indecision and absorbing others’ moods.' },
+        3:  { name: 'The Creator',    text: 'Expressive, optimistic, and magnetic. Communication and creativity are your native languages. The challenge is focus — scattered energy dilutes your gifts.' },
+        4:  { name: 'The Builder',    text: 'Disciplined, practical, and dependable. You build things that last — systems, homes, reputations. Flexibility is your growth edge; not everything needs a blueprint.' },
+        5:  { name: 'The Explorer',   text: 'Adventurous, adaptable, and freedom-loving. Change energizes you and routine drains you. Learning healthy commitment turns restlessness into momentum.' },
+        6:  { name: 'The Nurturer',   text: 'Responsible, warm, and service-oriented. You are the one people call in a crisis. Balance caring for others with boundaries — martyrdom is not the assignment.' },
+        7:  { name: 'The Seeker',     text: 'Analytical, introspective, and drawn to the deeper why. You need solitude to recharge and truth to feel alive. Don’t let skepticism wall you off from connection.' },
+        8:  { name: 'The Powerhouse', text: 'Ambitious, authoritative, and materially savvy. You understand leverage, money, and influence. The lesson is using power in service of something bigger than status.' },
+        9:  { name: 'The Humanitarian', text: 'Compassionate, wise, and globally minded. You feel the world’s weight and want to lighten it. Learning to release — people, outcomes, the past — is your superpower.' },
+        11: { name: 'The Illuminator',  text: 'A master number. Heightened intuition, spiritual sensitivity, and the ability to inspire. The voltage is high — grounding practices keep the signal clear. (Base energy: 2)' },
+        22: { name: 'The Master Builder', text: 'A master number. The visionary who can make big dreams physically real — architect of institutions, systems, legacies. Pressure is part of the package. (Base energy: 4)' },
+        33: { name: 'The Master Teacher', text: 'A master number. Selfless service and healing through uplifting others. Rare and demanding — it asks you to embody what you teach. (Base energy: 6)' }
+    };
+
+    const CHART_POSITIONS = [
+        { key: 'lifePath',    label: 'Life Path',   blurb: 'Your life’s central lesson and direction, from your birth date.' },
+        { key: 'expression',  label: 'Expression',  blurb: 'Your natural talents and how you show up, from your full name.' },
+        { key: 'soulUrge',    label: 'Soul Urge',   blurb: 'What your heart truly wants, from the vowels in your name.' },
+        { key: 'personality', label: 'Personality', blurb: 'The face you show the world, from the consonants in your name.' },
+        { key: 'birthday',    label: 'Birthday',    blurb: 'A specific gift you carry, from your day of birth.' }
+    ];
+
+    const DAY_READINGS = {
+        1: { headline: 'Start something.', text: 'A 1 day rewards initiative. Send the pitch, open the project file, make the first move. Solo focus beats committee thinking today — trust your own read and act on it.', lucky: ['Bold decisions', 'New beginnings', 'Color: Red'] },
+        2: { headline: 'Slow down and sync up.', text: 'A 2 day favors patience, partnership, and listening. Push nothing. Details, diplomacy, and quiet progress win — the right conversation today is worth ten meetings tomorrow.', lucky: ['Collaboration', 'Patience', 'Color: Orange'] },
+        3: { headline: 'Express yourself.', text: 'A 3 day is social and creative. Write, post, pitch, joke, connect. Your words land better than usual — use them. Keep the calendar light enough to leave room for play.', lucky: ['Creativity', 'Conversation', 'Color: Yellow'] },
+        4: { headline: 'Do the work.', text: 'A 4 day is for foundations: organize, fix, plan, grind. Unsexy tasks completed today pay compound interest. Skip shortcuts — they won’t hold.', lucky: ['Systems', 'Follow-through', 'Color: Green'] },
+        5: { headline: 'Embrace the plot twist.', text: 'A 5 day brings change, movement, and the unexpected. Stay loose and say yes to the detour — rigidity is the only real risk today. Great for travel, launches, and trying the new thing.', lucky: ['Flexibility', 'Adventure', 'Color: Sky Blue'] },
+        6: { headline: 'Tend your people.', text: 'A 6 day centers home, family, and responsibility. Show up for someone. Repair the small rift, cook the meal, finish the domestic task you’ve dodged. Harmony is the win condition.', lucky: ['Family', 'Balance', 'Color: Indigo'] },
+        7: { headline: 'Go inward.', text: 'A 7 day asks for quiet, study, and reflection over hustle. Research beats action; solitude beats networking. The insight you need surfaces when the noise stops.', lucky: ['Reflection', 'Research', 'Color: Violet'] },
+        8: { headline: 'Handle business.', text: 'An 8 day is about money, power, and results. Negotiate, invoice, ask for the raise, make the executive call. Think big and act like the outcome is already yours.', lucky: ['Ambition', 'Finances', 'Color: Gold'] },
+        9: { headline: 'Release and complete.', text: 'A 9 day closes cycles. Finish what’s lingering, forgive what’s stale, clear what’s cluttered. Don’t start new ventures — make space for what a 1 day will bring.', lucky: ['Completion', 'Generosity', 'Color: White'] }
+    };
+
+    /* =====================================================================
+       UI WIRING
+       ===================================================================== */
+    const $ = (id) => document.getElementById(id);
+
+    function buildCard(position, value) {
+        const meaning = CORE_MEANINGS[value];
+        const isMaster = MASTERS.has(value);
+        const card = document.createElement('div');
+        card.className = 'num-card';
+        card.innerHTML = `
+            <div class="num-card-top">
+                <div class="num-circle${isMaster ? ' master' : ''}">${value}</div>
+                <div>
+                    <div class="num-card-label">${position.label}</div>
+                    <div class="num-card-name">${meaning.name}</div>
+                    ${isMaster ? '<span class="master-tag">Master Number</span>' : ''}
+                </div>
+            </div>
+            <p class="num-card-desc"><em style="color: var(--text-muted); font-style: normal; font-size: 0.85rem; display:block; margin-bottom:8px;">${position.blurb}</em>${meaning.text}</p>`;
+        return card;
+    }
+
+    function renderChart(name, y, m, d) {
+        const values = {
+            lifePath:    lifePath(y, m, d),
+            expression:  expression(name),
+            soulUrge:    soulUrge(name),
+            personality: personality(name),
+            birthday:    birthdayNumber(d)
+        };
+        const grid = $('chartGrid');
+        grid.innerHTML = '';
+        CHART_POSITIONS.forEach((pos, i) => {
+            const card = buildCard(pos, values[pos.key]);
+            grid.appendChild(card);
+            setTimeout(() => card.classList.add('revealed'), 80 * i);
+        });
+        $('chart').classList.remove('num-hidden');
+    }
+
+    function renderNumberscope(bMonth, bDay) {
+        const now = new Date();
+        const cy = now.getFullYear(), cm = now.getMonth() + 1, cd = now.getDate();
+        const pY = personalYear(bMonth, bDay, cy);
+        const pM = personalMonth(pY, cm);
+        const pD = personalDay(pM, cd);
+        const uD = universalDay(cy, cm, cd);
+        const reading = DAY_READINGS[pD];
+
+        $('scopeDate').textContent = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        $('personalDayNum').textContent = pD;
+        $('personalMonthNum').textContent = pM;
+        $('personalYearNum').textContent = pY;
+        $('universalDayNum').textContent = uD;
+        $('scopeHeadline').textContent = 'Personal Day ' + pD + ' — ' + reading.headline;
+        $('scopeText').textContent = reading.text;
+        $('scopeLucky').innerHTML = reading.lucky.map(t => '<span>' + t + '</span>').join('');
+        $('numberscope').classList.remove('num-hidden');
+    }
+
+    function generate(name, dateStr, scroll) {
+        const [y, m, d] = dateStr.split('-').map(Number);
+        if (!name || lettersOf(name).length === 0 || !y || !m || !d) {
+            $('formError').style.display = 'block';
+            return false;
+        }
+        $('formError').style.display = 'none';
+        renderNumberscope(m, d);
+        renderChart(name, y, m, d);
+        try { localStorage.setItem('numerology', JSON.stringify({ name, dateStr })); } catch (e) {}
+        if (scroll) setTimeout(() => $('numberscope').scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+        return true;
+    }
+
+    $('numForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        generate($('fullName').value.trim(), $('birthDate').value, true);
+    });
+
+    // Returning visitor: restore saved details and show today's numberscope instantly
+    try {
+        const saved = JSON.parse(localStorage.getItem('numerology') || 'null');
+        if (saved && saved.name && saved.dateStr) {
+            $('fullName').value = saved.name;
+            $('birthDate').value = saved.dateStr;
+            generate(saved.name, saved.dateStr, false);
+        }
+    } catch (e) {}
+
+    /* ===== Header behavior (matches main site) ===== */
+    const header = $('header');
+    window.addEventListener('scroll', () => {
+        header.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+    $('navToggle').addEventListener('click', () => {
+        $('navMenu').classList.toggle('open');
+    });
+    </script>
+</body>
+</html>
