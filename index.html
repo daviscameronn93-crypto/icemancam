@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>icemancam | Developer & Creative Technologist</title>
     <meta name="description" content="Portfolio of Cameron (icemancam) — Full-stack developer, software engineer, and creative technologist specializing in premium, highly interactive digital experiences.">
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://icemancam.com/">
@@ -24,10 +24,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- CSS Stylesheet -->
     <link rel="stylesheet" href="styles.css">
-    
+
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -44,12 +44,13 @@
             <a href="#home" class="logo" id="header-logo">
                 <span class="logo-accent">ice</span>mancam<span class="logo-dot">.</span>
             </a>
-            
+
             <nav class="nav-menu" id="nav-menu">
                 <ul class="nav-list">
                     <li><a href="#home" class="nav-link active" id="nav-link-home">Home</a></li>
                     <li><a href="#about" class="nav-link" id="nav-link-about">About</a></li>
                     <li><a href="#projects" class="nav-link" id="nav-link-projects">Projects</a></li>
+                    <li><a href="numerology.html" class="nav-link" id="nav-link-numerology">Numerology</a></li>
                     <li><a href="#contact" class="nav-link" id="nav-link-contact">Contact</a></li>
                 </ul>
             </nav>
@@ -88,7 +89,7 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <div class="hero-visual">
                     <div class="interactive-card" id="hero-interactive-card">
                         <div class="card-header">
@@ -247,6 +248,41 @@
             </div>
         </section>
 
+        <!-- Numerology Lab Teaser Section -->
+        <section id="numerology-teaser">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tagline">New Interactive Tool</span>
+                    <h2 class="section-title">Numerology Lab</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="about-grid" style="align-items: center;">
+                    <div class="about-text">
+                        <h3 style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 600; margin-bottom: 16px;">Your birth chart, <span class="text-gradient">decoded in numbers</span></h3>
+                        <p>Generate a full Pythagorean numerology birth chart from your name and birth date — Life Path, Expression, Soul Urge, Personality, and Birthday numbers, each with a detailed reading.</p>
+                        <p>Then check back every day for your personal numberscope: a daily reading calculated from your unique numbers. Runs entirely in your browser.</p>
+                        <a href="numerology.html" class="btn btn-primary" id="btn-numerology-teaser">Try the Numerology Lab <i data-lucide="sparkles"></i></a>
+                    </div>
+                    <div class="interactive-card">
+                        <div class="card-header">
+                            <div class="window-dot red"></div>
+                            <div class="window-dot yellow"></div>
+                            <div class="window-dot green"></div>
+                            <span class="window-title">birth-chart.js</span>
+                        </div>
+                        <div class="card-body">
+                            <pre><code><span class="code-keyword">const</span> <span class="code-variable">chart</span> = {
+  lifePath: <span class="code-number">7</span>,      <span style="color: var(--text-muted);">// The Seeker</span>
+  expression: <span class="code-number">3</span>,    <span style="color: var(--text-muted);">// The Creator</span>
+  soulUrge: <span class="code-number">11</span>,     <span style="color: var(--text-muted);">// Master Number</span>
+  personalDay: <span class="code-string">'calculated daily'</span>
+};</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Contact Section -->
         <section id="contact" class="contact-section">
             <div class="section-container">
@@ -262,7 +298,7 @@
                         <p>
                             Whether you have an upcoming project, want to discuss software development, or just want to say hi, feel free to drop a message or connect through social channels.
                         </p>
-                        
+
                         <ul class="contact-list">
                             <li>
                                 <div class="contact-icon"><i data-lucide="mail"></i></div>
@@ -320,13 +356,13 @@
                 </a>
                 <p>Crafting high-end, responsive digital interfaces.</p>
             </div>
-            
+
             <div class="footer-links">
                 <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub" id="social-git"><i data-lucide="github"></i></a>
                 <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn" id="social-linkedin"><i data-lucide="linkedin"></i></a>
                 <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Twitter" id="social-twitter"><i data-lucide="twitter"></i></a>
             </div>
-            
+
             <div class="footer-copyright">
                 <p>&copy; 2026 icemancam.com. All rights reserved.</p>
             </div>
